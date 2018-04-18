@@ -1,42 +1,34 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity 
-} from 'react-native';
+import {StyleSheet, Text , View , TextInput , TouchableOpacity } from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
-export default class Form extends Component<{}> {
-
-
-	render(){
+	const FormLogin = (props) => {
 		return(
 			<View style={styles.container}>
-          <TextInput style={styles.inputBox} 
-              underlineColorAndroid='rgba(0,0,0,0)' 
+          <TextInput style={styles.inputBox}
+              underlineColorAndroid='rgba(0,0,0,0)'
               placeholder="Email"
               placeholderTextColor = "#ffffff"
               selectionColor="#fff"
               keyboardType="email-address"
               onSubmitEditing={()=> this.password.focus()}
-
-              
+              onChangeText={props.onEmailChangeText}
               />
-          <TextInput style={styles.inputBox} 
-              underlineColorAndroid='rgba(0,0,0,0)' 
+          <TextInput style={styles.inputBox}
+              underlineColorAndroid='rgba(0,0,0,0)'
               placeholder="Password"
               secureTextEntry={true}
               placeholderTextColor = "#ffffff"
               ref={(input) => this.password = input}
-              />  
-                <TouchableOpacity style={styles.button}>
-                 <Text style={styles.buttonText}>{this.props.type}</Text>
+              onChangeText={props.onPasswordChangeText}
+              />
+                <TouchableOpacity onPress={props.onPress} style={styles.button}>
+                 <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
   		</View>
 			)
-	}
-}
+    }
+
 
 const styles = StyleSheet.create({
   container : {
@@ -68,5 +60,6 @@ const styles = StyleSheet.create({
     textAlign:'center'
   }
 
-  
+
 });
+export default FormLogin;

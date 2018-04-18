@@ -4,29 +4,61 @@ import {
   Text,
   View ,
   StatusBar ,
-  TouchableOpacity
+  TouchableOpacity ,
+  AsyncStorage
 } from 'react-native';
 
 import Logo from '../components/Logo';
-import Form from '../components/Form';
 import FormReg from '../components/FormReg';
 
 import {Actions} from 'react-native-router-flux';
 
-export default class Signup extends Component<{}> 
+export default class Signup extends Component<{}>
 {
-        goBack() {
-                  Actions.pop();
-                  }
+  constructor()
+    {
+    super();
+    this.state = { name:'' ,email: '' ,password: ''};
+    }
+
+        create ()
+        {
+          if (this.validateEmail(this.state.email))
+          {
+          AsyncStorage.setItem('name', this.state.name);
+          AsyncStorage.setItem('email', this.state.email);
+          AsyncStorage.setItem('password', this.state.password);
+           alert("Name ,"+this.state.name +" Email ,"+this.state.email+" Password"+this.state.password)
+          }
+          else
+          {
+          alert("Not Valid Email");
+          }
+
+        }
+
+        // When I press SignIn From Signup page
+        goBack() { this.props.navigation.goBack() }
+        ///////////////////////////////////////////
+    validateEmail = (text) => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    if(reg.test(text) === false)
+         {return false;}
+    else { return  true; }
+    }
+
   render() {
     return (
          <View  style={styles.container}>
           <Text style={styles.logoText}>Create New Account </Text>
-         <FormReg> </FormReg>     
+         <FormReg onPress={this.create.bind(this)} onNameChangeText={(name) => this.setState({name:name})}
+         onEmailChangeText={(email) => this.setState({email:email})}
+         onPasswordChangeText={(password) => this.setState({password:password})}
+         />
 
         <View style={styles.signupTextCont}>
           <Text style={styles.signupText}> Already Have An Account ? </Text>
-          <TouchableOpacity onPress={this.goBack}><Text style={styles.signupButton}> Sign in</Text></TouchableOpacity>
+          <TouchableOpacity onPress={this.goBack.bind(this)}><Text style={styles.signupButton}> Sign in</Text></TouchableOpacity>
         </View>
         </View>
       )
@@ -34,7 +66,7 @@ export default class Signup extends Component<{}>
 
 }
 const styles = StyleSheet.create({
- 
+
  container :
  {
   backgroundColor:'#455a64' ,
@@ -63,5 +95,5 @@ const styles = StyleSheet.create({
     fontSize:20,
     color:'rgba(255, 255, 255, 0.7)'
   }
-  
+
 });

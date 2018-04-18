@@ -4,26 +4,54 @@ import {
   Text,
   View ,
   StatusBar ,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native';
 
 import Logo from '../components/Logo';
-import Form from '../components/Form';
+import FormLogin from '../components/FormLogin';
 import {Actions} from 'react-native-router-flux';
 
-export default class Login extends Component<{}> 
+export default class Login extends Component<{}>
 {
-       signup() {
-		          Actions.signup()
+     constructor() {
+     super();
+     this.state = { email: '' ,password: ''};
+   }
+  login () {
+     email="abdo@yahoo.com"
+     password="123456"
+     if (this.validateEmail(this.state.email)){
+      if (this.state.email==email && this.state.password==password)
+      {
+              this.props.navigation.navigate('Order')
+      }
+   else
+    {
+         alert("Email | password incorrect");
+    }
+  }
+           //Alert.alert("Email ::" + this.state.email + " , Password ::" + this.state.password);
+           // this.props.navigation.navigate('Order')
+           }
+  signup() {
+             this.props.navigation.navigate('Signup')
 	            }
+  validateEmail = (text) => {
+           let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+          if(reg.test(text) === false)
+             {return false;}
+          else { return  true; }
+              }
   render() {
     return (
     		 <View  style={styles.container}>
     		<Logo/>
-    		<Form type="Login"/>
+    		<FormLogin onPress={this.login.bind(this)} onEmailChangeText={(email) => this.setState({email:email})}
+        onPasswordChangeText={(password) => this.setState({password:password})} />
     		<View style={styles.signupTextCont}>
-					<Text style={styles.signupText}> Don't have an account yet ? </Text>
-					<TouchableOpacity onPress={this.signup}><Text style={styles.signupButton}> Register</Text></TouchableOpacity>
+					<Text style={styles.signupText}> Do not have an account yet ? </Text>
+					<TouchableOpacity onPress={this.signup.bind(this)}><Text style={styles.signupButton}> Register</Text></TouchableOpacity>
 				</View>
     		</View>
     	)
@@ -31,7 +59,7 @@ export default class Login extends Component<{}>
 
 }
 const styles = StyleSheet.create({
- 
+
  container :
  {
   backgroundColor:'#455a64' ,
@@ -55,5 +83,5 @@ const styles = StyleSheet.create({
   	fontSize:17,
   	fontWeight:'500'
   }
-  
+
 });

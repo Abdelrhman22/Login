@@ -1,63 +1,47 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity 
-} from 'react-native';
+import {StyleSheet , Text , View , TextInput , TouchableOpacity } from 'react-native';
 
-export default class FormReg extends Component<{}> {
+const FormReg = (props) => {
 
-
-	render(){
 		return(
 			<View style={styles.container}>
 
-<TextInput style={styles.inputBox} 
-              underlineColorAndroid='rgba(0,0,0,0)' 
+         <TextInput style={styles.inputBox}
+              underlineColorAndroid='rgba(0,0,0,0)'
               placeholder="Name"
               placeholderTextColor = "#ffffff"
               selectionColor="#fff"
               keyboardType="email-address"
               onSubmitEditing={()=> this.email.focus()}
-              
+							onChangeText={props.onNameChangeText}
               />
 
-          <TextInput style={styles.inputBox} 
-              underlineColorAndroid='rgba(0,0,0,0)' 
+          <TextInput style={styles.inputBox}
+              underlineColorAndroid='rgba(0,0,0,0)'
               placeholder="Email"
               placeholderTextColor = "#ffffff"
               selectionColor="#fff"
               keyboardType="email-address"
               ref={(input) => this.email = input}
               onSubmitEditing={()=> this.password.focus()}
-
-              
+							onChangeText={props.onEmailChangeText}
               />
-          <TextInput style={styles.inputBox} 
-              underlineColorAndroid='rgba(0,0,0,0)' 
+          <TextInput style={styles.inputBox}
+              underlineColorAndroid='rgba(0,0,0,0)'
               placeholder="Password"
               secureTextEntry={true}
               placeholderTextColor = "#ffffff"
               ref={(input) => this.password = input}
-              onSubmitEditing={()=> this.confirmpassword.focus()}
-              /> 
+							onChangeText={props.onPasswordChangeText}
+              />
 
-              <TextInput style={styles.inputBox} 
-              underlineColorAndroid='rgba(0,0,0,0)' 
-              placeholder="Confirm - Password"
-              secureTextEntry={true}
-              placeholderTextColor = "#ffffff"
-              ref={(input) => this.confirmpassword = input}
-              />   
-                <TouchableOpacity style={styles.button}>
-                 <Text style={styles.buttonText}>Create Account </Text>
+                <TouchableOpacity onPress={props.onPress} style={styles.button}>
+                 <Text style={styles.buttonText}> Create Account </Text>
                 </TouchableOpacity>
   		</View>
 			)
 	}
-}
+
 
 const styles = StyleSheet.create({
   container : {
@@ -89,5 +73,6 @@ const styles = StyleSheet.create({
     textAlign:'center'
   }
 
-  
+
 });
+export default FormReg;

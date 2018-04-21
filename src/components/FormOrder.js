@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text , View , TextInput , TouchableOpacity } from 'react-native';
+import {StyleSheet, Text , View , TextInput , TouchableOpacity, CheckBox } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 	const FormOrder = (props) => {
 		return(
           		<Text style={styles.Text}> Create Order </Text>
+						
 			)
 	}
 

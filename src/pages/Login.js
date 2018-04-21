@@ -18,6 +18,10 @@ export default class Login extends Component<{}>
      super();
      this.state = { email: '' ,password: ''};
    }
+   testOrder()
+   {
+     this.props.navigation.navigate('Order')
+   }
   login () {
      email="abdo@yahoo.com"
      password="123456"
@@ -47,7 +51,7 @@ export default class Login extends Component<{}>
     return (
     		 <View  style={styles.container}>
     		<Logo/>
-    		<FormLogin onPress={this.login.bind(this)} onEmailChangeText={(email) => this.setState({email:email})}
+    		<FormLogin onPress={this.testOrder.bind(this)} onEmailChangeText={(email) => this.setState({email:email})}
         onPasswordChangeText={(password) => this.setState({password:password})} />
     		<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}> Do not have an account yet ? </Text>

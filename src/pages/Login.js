@@ -51,7 +51,7 @@ export default class Login extends Component<{}>
     return (
     		 <View  style={styles.container}>
     		<Logo/>
-    		<FormLogin onPress={this.testOrder.bind(this)} onEmailChangeText={(email) => this.setState({email:email})}
+    		<FormLogin onPress={this.login.bind(this)} onEmailChangeText={(email) => this.setState({email:email})}
         onPasswordChangeText={(password) => this.setState({password:password})} />
     		<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}> Do not have an account yet ? </Text>

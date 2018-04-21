@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import {StyleSheet , Text , View , TextInput , TouchableOpacity,FlatList,Alert } from 'react-native';
-import { StyleSheet, Text, View,Image,TextInput,Button,TouchableHighlight,FlatList,Alert } from 'react-native';
+import { StyleSheet, Text, View,Image,TextInput,Button,TouchableHighlight,FlatList,Alert,TouchableOpacity } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import FormOrder from '../components/FormOrder';
 import { CheckBox , Avatar } from 'react-native-elements'
@@ -60,8 +60,7 @@ export default class Order extends Component<{}>
           <Avatar
               medium
              source={item.logo}
-             onPress={() => console.log("Works!")}
-            activeOpacity={0.7}
+            activeOpacity={0.4}
            />
            <Text style={{fontSize:20,fontWeight:'bold',color:'white', margin:5}}>{item.name}</Text>
            </View>
@@ -75,13 +74,11 @@ export default class Order extends Component<{}>
         </View>
         }
         />
-
-               <TouchableHighlight
-    style={styles.submit}
-    onPress={this.MakeOrder.bind(this)}
-    underlayColor='#fff'>
-      <Text style={[styles.submitText]}>Submit</Text>
-      </TouchableHighlight>
+  <View style={{backgroundColor:'#455a64' , flex:1,  alignItems:'center',  justifyContent :'center',}}>
+        <TouchableOpacity style={styles.button}>
+         <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+        </View>
            </View>
 
         );
@@ -93,29 +90,21 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#455a64',
     },
-    headerText:{
-        color:'green',
-      textAlign:'center',
-      fontSize:30
-    },
-    submit:{
-      margin:15,
-      paddingTop:5,
-      paddingBottom:5,
-      paddingLeft:20,
-      paddingRight:20,
-      backgroundColor:'#A1887F',
-      borderRadius: 10,
-      borderWidth: 1,
-      borderColor: 'white',
-  },
-  submitText:{
-      color:'white',
-      textAlign:'center',
-      fontSize:20
-  },
   checkBoxText:{
     backgroundColor:'#A1887F',
     justifyContent:"space-between"
-  }
+  } ,
+  button: {
+   width:300,
+   backgroundColor:'#1c313a',
+    borderRadius: 25,
+     marginVertical: 10,
+     paddingVertical: 12
+ },
+ buttonText: {
+   fontSize:16,
+   fontWeight:'500',
+   color:'#ffffff',
+   textAlign:'center'
+ }
   });
